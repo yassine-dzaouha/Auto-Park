@@ -55,9 +55,7 @@
           <input type="hidden" id="voiture-id" name="id" value="" />
           <div class="form-grid">
             <div class="field">
-              <label for="marque"
-                >Marque <span aria-hidden="true">*</span></label
-              >
+              <label for="marque">Marque <span aria-hidden="true">*</span></label>
               <input
                 id="marque"
                 name="marque"
@@ -142,6 +140,7 @@
                 required
                 aria-describedby="erreur-statut"
               >
+                <option value="">Choisir une status</option>
                 <option value="Disponible">Disponible</option>
                 <option value="Louée">Louée</option>
                 <option value="En maintenance">En maintenance</option>
@@ -260,188 +259,6 @@
             <!-- Lignes de démonstration statiques : à remplacer par un affichage JS.
                data-id identifie la voiture ; data-action indique l'action. -->
             <tbody id="liste-voitures">
-              <tr>
-                <td><strong>Dacia</strong></td>
-                <td>Sandero</td>
-                <td><span class="registration">AUTO-001</span></td>
-                <td>Citadine</td>
-                <td class="price">250 <span>DH / jour</span></td>
-                <td><span class="badge badge-disponible">Disponible</span></td>
-                <td>
-                  <div class="row-actions">
-                    <button
-                      type="button"
-                      class="button button-edit"
-                      data-action="modifier"
-                      data-id="1"
-                      aria-label="Modifier Dacia Sandero, AUTO-001"
-                    >
-                      Modifier
-                    </button>
-                    <button
-                      type="button"
-                      class="button button-delete"
-                      data-action="supprimer"
-                      data-id="1"
-                      aria-label="Supprimer Dacia Sandero, AUTO-001"
-                    >
-                      Supprimer
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td><strong>Renault</strong></td>
-                <td>Mégane</td>
-                <td><span class="registration">AUTO-002</span></td>
-                <td>Berline</td>
-                <td class="price">380 <span>DH / jour</span></td>
-                <td><span class="badge badge-louee">Louée</span></td>
-                <td>
-                  <div class="row-actions">
-                    <button
-                      type="button"
-                      class="button button-edit"
-                      data-action="modifier"
-                      data-id="2"
-                      aria-label="Modifier Renault Mégane, AUTO-002"
-                    >
-                      Modifier
-                    </button>
-                    <button
-                      type="button"
-                      class="button button-delete"
-                      data-action="supprimer"
-                      data-id="2"
-                      aria-label="Supprimer Renault Mégane, AUTO-002"
-                    >
-                      Supprimer
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td><strong>Hyundai</strong></td>
-                <td>Tucson</td>
-                <td><span class="registration">AUTO-003</span></td>
-                <td>SUV</td>
-                <td class="price">550 <span>DH / jour</span></td>
-                <td>
-                  <span class="badge badge-maintenance">En maintenance</span>
-                </td>
-                <td>
-                  <div class="row-actions">
-                    <button
-                      type="button"
-                      class="button button-edit"
-                      data-action="modifier"
-                      data-id="3"
-                      aria-label="Modifier Hyundai Tucson, AUTO-003"
-                    >
-                      Modifier
-                    </button>
-                    <button
-                      type="button"
-                      class="button button-delete"
-                      data-action="supprimer"
-                      data-id="3"
-                      aria-label="Supprimer Hyundai Tucson, AUTO-003"
-                    >
-                      Supprimer
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td><strong>Peugeot</strong></td>
-                <td>208</td>
-                <td><span class="registration">AUTO-004</span></td>
-                <td>Citadine</td>
-                <td class="price">280 <span>DH / jour</span></td>
-                <td><span class="badge badge-disponible">Disponible</span></td>
-                <td>
-                  <div class="row-actions">
-                    <button
-                      type="button"
-                      class="button button-edit"
-                      data-action="modifier"
-                      data-id="4"
-                      aria-label="Modifier Peugeot 208, AUTO-004"
-                    >
-                      Modifier
-                    </button>
-                    <button
-                      type="button"
-                      class="button button-delete"
-                      data-action="supprimer"
-                      data-id="4"
-                      aria-label="Supprimer Peugeot 208, AUTO-004"
-                    >
-                      Supprimer
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td><strong>Toyota</strong></td>
-                <td>Corolla</td>
-                <td><span class="registration">AUTO-005</span></td>
-                <td>Berline</td>
-                <td class="price">420 <span>DH / jour</span></td>
-                <td><span class="badge badge-louee">Louée</span></td>
-                <td>
-                  <div class="row-actions">
-                    <button
-                      type="button"
-                      class="button button-edit"
-                      data-action="modifier"
-                      data-id="5"
-                      aria-label="Modifier Toyota Corolla, AUTO-005"
-                    >
-                      Modifier
-                    </button>
-                    <button
-                      type="button"
-                      class="button button-delete"
-                      data-action="supprimer"
-                      data-id="5"
-                      aria-label="Supprimer Toyota Corolla, AUTO-005"
-                    >
-                      Supprimer
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td><strong>Dacia</strong></td>
-                <td>Duster</td>
-                <td><span class="registration">AUTO-006</span></td>
-                <td>SUV</td>
-                <td class="price">450 <span>DH / jour</span></td>
-                <td><span class="badge badge-disponible">Disponible</span></td>
-                <td>
-                  <div class="row-actions">
-                    <button
-                      type="button"
-                      class="button button-edit"
-                      data-action="modifier"
-                      data-id="6"
-                      aria-label="Modifier Dacia Duster, AUTO-006"
-                    >
-                      Modifier
-                    </button>
-                    <button
-                      type="button"
-                      class="button button-delete"
-                      data-action="supprimer"
-                      data-id="6"
-                      aria-label="Supprimer Dacia Duster, AUTO-006"
-                    >
-                      Supprimer
-                    </button>
-                  </div>
-                </td>
-              </tr>
             </tbody>
           </table>
         </div>
