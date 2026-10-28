@@ -248,3 +248,19 @@ function deleteCar(id){
     cancelModify();
 };
 
+function rechercheCars(){
+    let newCars = cars.filter(car => car.marque.toLowerCase().startsWith(recherche.value.trim())  
+                                || car.modele.toLowerCase().startsWith(recherche.value.trim())
+                                || car.immatriculation.toLowerCase().startsWith(recherche.value.trim()));
+    if(newCars){
+        return newCars;
+    }
+    else {
+        return cars;
+    }
+}
+
+
+recherche.addEventListener("input", ()=>{
+    showCars(rechercheCars());
+});
