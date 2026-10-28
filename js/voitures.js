@@ -7,6 +7,7 @@ if(!localStorage.getItem('cars')){
 }
 
 let cars = JSON.parse(localStorage.getItem("cars"));
+
 console.log(localStorage.getItem('cars'));
 
 const form = document.getElementById("formulaire-voiture");
@@ -24,7 +25,7 @@ let recherche = document.getElementById("recherche");
 let filtreStatut = document.getElementById("filtre-statut");
 let filtreCategorie = document.getElementById("filtre-categorie");
 let tri = document.getElementById("tri-prix");
-let boutonReset = document.getElementById("reinitialiser");
+let boutonReset = document.getElementById("reinitialiser-filtres");
 
 showCars(cars);
 
@@ -249,18 +250,22 @@ function deleteCar(id){
 };
 
 function rechercheCars(){
+    if(!recherche.value.trim()){
+        return cars;
+    }
     let newCars = cars.filter(car => car.marque.toLowerCase().startsWith(recherche.value.trim())  
                                 || car.modele.toLowerCase().startsWith(recherche.value.trim())
                                 || car.immatriculation.toLowerCase().startsWith(recherche.value.trim()));
-    if(newCars){
-        return newCars;
-    }
-    else {
-        return cars;
-    }
+    console.log(newCars)
+    return newCars;
 }
 
+function filtreStatusCars(filtredCars){
+    if(!filtreStatut.value){
+        return filtredCars;
+    }
+    let newCars = filtredCars.filter(car => car.statut == filtreStatut.value);
+    return newCars;
+};
 
-recherche.addEventListener("input", ()=>{
-    showCars(rechercheCars());
-});
+
