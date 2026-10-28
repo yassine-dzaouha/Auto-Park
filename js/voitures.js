@@ -276,3 +276,19 @@ function filtreCategoryCars(filtredCars){
     return newCars;
 };
 
+function sortCars(filtredCars){
+    let sortedCars = [...filtredCars];
+    if(!tri.value){
+        return filtredCars;
+    }
+    if(tri.value == "croissant"){
+        sortedCars.sort( (a,b) => a.prixJour - b.prixJour);
+        console.log(sortedCars)
+        return sortedCars;
+    }
+    if(tri.value == "decroissant"){
+        sortedCars.sort( (a,b) => b.prixJour - a.prixJour);
+        return sortedCars;
+    }
+}
+
