@@ -268,4 +268,11 @@ function filtreStatusCars(filtredCars){
     return newCars;
 };
 
+function filtreCategoryCars(filtredCars){
+    if(!filtreCategorie.value){
+        return filtredCars;
+    }
+    let newCars = filtredCars.filter(car => car.categorie == filtreCategorie.value);
+    return newCars;
+};
 
