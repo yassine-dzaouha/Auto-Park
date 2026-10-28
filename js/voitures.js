@@ -1,19 +1,13 @@
 import {voituresInitiales} from "./data.js";
-
-let cars = null;
-
-cars = voituresInitiales;
-
 let carsId = 7;
+let modifyId = null;
 
-let modifyId = 0;
-
-if(!localStorage.length){
-    localStorage.setItem("cars", JSON.stringify(cars));
+if(!localStorage.getItem('cars')){
+    localStorage.setItem("cars", JSON.stringify(voituresInitiales));
 }
 
-console.log("initial: ",voituresInitiales);
-console.log("new cars: ",cars)
+let cars = JSON.parse(localStorage.getItem("cars"));
+console.log(localStorage.getItem('cars'));
 
 const form = document.getElementById("formulaire-voiture");
 const marque = document.getElementById("marque");
@@ -23,15 +17,43 @@ const categorie = document.getElementById("categorie");
 const prixJour = document.getElementById("prix-jour");
 const statut = document.getElementById("statut");
 const carsList = document.getElementById("liste-voitures");
+const cancelModifyBtn = document.getElementById("annuler-modification")
 const btn = document.getElementById("bouton-enregistrer");
+const formTitle = document.getElementById("titre-formulaire");
+let recherche = document.getElementById("recherche");
+let filtreStatut = document.getElementById("filtre-statut");
+let filtreCategorie = document.getElementById("filtre-categorie");
+let tri = document.getElementById("tri-prix");
+let boutonReset = document.getElementById("reinitialiser");
 
-showCars()
+showCars(cars);
 
 btn.addEventListener("click", (e)=>{
     e.preventDefault();
-    addCar();
-    showCars()
-})
+    sumbitCar();
+    showCars(cars);
+});
+
+cancelModifyBtn.addEventListener("click", (e)=>{
+    e.preventDefault();
+    cancelModify();
+    showCars(cars);
+});
+
+function sumbitCar(){
+    
+    if(!formValidation()){
+        return;
+    }
+    
+    if(modifyId){
+        editCar(modifyId);
+    }
+    else {
+         addCard();
+    }
+    
+}
 
 function formValidation() {
     let valide = true;
@@ -49,25 +71,26 @@ function formValidation() {
     }
 
     const immatPatern = /^[A-Za-z]{4}-\d{3}$/;
-    const immatError = document.getElementById("erreur-immatriculation")
+    const immatError = document.getElementById("erreur-immatriculation");
 
     if (immatriculation.value.trim() === "") {
         immatError.textContent = "Le matricule est obligatoire.";
         valide = false;
-    } else if (!immatPatern.test(immatriculation.value.trim())) {
+    }
+    else if (!immatPatern.test(immatriculation.value.trim())) {
         immatError.textContent = "Format invalide. Exemple : AUTO-007";
         valide = false;
-    } else {
-        const car = cars.find(
-            car => car.immatriculation === immatriculation.value.trim()
-        );
-
-        if (car) {
+    }
+    else {
+        cars.forEach( car => {
+           if ( car.immatriculation == immatriculation.value.trim() && modifyId.id != car.id){
             immatError.textContent = "Le matricule existe déjà.";
             valide = false;
-        }
+            return;
+            }
+        })
     }
-
+    console.log(valide)
     if (categorie.value.trim() === "") {
         categorie.nextElementSibling.textContent = "La catégorie est obligatoire.";
         valide = false;
@@ -86,33 +109,27 @@ function formValidation() {
     return valide;
 }
 
-function addCar(){
-    
-    if(!formValidation()){
-        // alert("impossible")
-        return;
-    }
-    
+
+
+function addCard(){
     const car = {};
     car.id = carsId++;
-    car.marque = marque.value;
-    car.modele = modele.value;
-    car.immatriculation = immatriculation.value;
+    car.marque = marque.value.trim();
+    car.modele = modele.value.trim();
+    car.immatriculation = immatriculation.value.trim();
     car.categorie = categorie.value;
     car.prixJour = Number(prixJour.value);
     car.statut = statut.value;
     cars.push(car);
 
     localStorage.setItem("cars", JSON.stringify(cars))
-
     form.reset();
 }
 
-function showCars(){
-    cars = JSON.parse(localStorage.getItem("cars"));
-    console.log(cars)
+function showCars(carsTable){
+    console.log(carsTable);
     carsList.textContent = "";
-    cars.forEach((car)=>{
+    carsTable.forEach((car)=>{
         let tr = creatElem("tr","","");
         
         let marqueTd = creatElem("td","","");
@@ -140,7 +157,10 @@ function showCars(){
         editBtn.setAttribute("data-action","modifier");
         editBtn.setAttribute("data-id", `${car.id}`);
         editBtn.setAttribute("aria-label", `Modifier ${car.marque} ${car.modele}, ${car.immatriculation}`);
-        
+        editBtn.addEventListener("click", () => {
+            modifyForm(car);
+        });
+
         let deleteBtn = creatElem("button", "button button-delete", "Supprimer");
         deleteBtn.setAttribute("type","button");
         deleteBtn.setAttribute("data-action", "supprimer");
@@ -148,8 +168,8 @@ function showCars(){
         deleteBtn.setAttribute("aria-label", `supprimer ${car.marque} ${car.modele}, ${car.immatriculation}`);
         deleteBtn.addEventListener("click", () => {
             deleteCar(car.id);
-            showCars();
-        })
+            showCars(cars);
+        });
         
         actionsDiv.append(editBtn, deleteBtn);
         actionsTd.append(actionsDiv);
@@ -157,14 +177,14 @@ function showCars(){
         carsList.append(tr);
     });
 
-}
+};
 
 function creatElem(tag, classname, content){
     const element = document.createElement(tag);
     element.className = classname;
     element.textContent = content;
     return element;
-}
+};
 
 function statusSwitch(status){
     let className ;
@@ -178,20 +198,53 @@ function statusSwitch(status){
         case "En maintenance" :
             className = "badge badge-maintenance";
             break;
-    }
+    };
     return className;
-}
+};
 
-// function modifyForm(car){
-//     marque.value = car.marque;
-//     modele.value = car.modele;
-//     immatriculation.value = car.immatriculation;
-//     categorie.value = car.categorie;
-//     prixJour.value = car.prixJour;
-//     statut.value = car.statut;
-// }
+function modifyForm(car){
+    marque.value = car.marque;
+    modele.value = car.modele;
+    immatriculation.value = car.immatriculation;
+    categorie.value = car.categorie;
+    prixJour.value = car.prixJour;
+    statut.value = car.statut;
+
+    cancelModifyBtn.hidden = false;
+    btn.textContent = "Modifier la voiture";
+    formTitle.textContent = "Modifier une voiture";
+    modifyId = car;
+};
+
+function cancelModify(){
+    form.reset();
+    cancelModifyBtn.hidden = true;
+    btn.textContent = "Ajouter la voiture";
+    formTitle.textContent = "Ajouter une voiture";
+    modifyId = 0;
+};
+
+function editCar(car){
+    if(!confirm("are you sure ?")){
+        return;
+    }
+    car.marque = marque.value.trim();
+    car.modele = modele.value.trim();
+    car.immatriculation = immatriculation.value.trim();
+    car.categorie = categorie.value;
+    car.prixJour = Number(prixJour.value);
+    car.statut = statut.value;
+    console.log(car);
+    cancelModify();
+    localStorage.setItem("cars", JSON.stringify(cars));
+};
 
 function deleteCar(id){
+    if(!confirm("are you sure ?")){
+        return;
+    }
     cars = cars.filter((car) => car.id != id);
     localStorage.setItem("cars", JSON.stringify(cars));
-}
+    cancelModify();
+};
+
