@@ -26,6 +26,7 @@ let filtreStatut = document.getElementById("filtre-statut");
 let filtreCategorie = document.getElementById("filtre-categorie");
 let tri = document.getElementById("tri-prix");
 let boutonReset = document.getElementById("reinitialiser-filtres");
+let errors = document.querySelectorAll(".field-error");
 
 showCars(cars);
 
@@ -58,11 +59,36 @@ function sumbitCar(){
 
 function formValidation() {
     let valide = true;
-    let errors = document.querySelectorAll(".field-error");
+    marque.addEventListener("input", function() {
+    marque.nextElementSibling.textContent = "";
+    });
+
+    modele.addEventListener("input", function() {
+        modele.nextElementSibling.textContent = "";
+    });
+
+    immatriculation.addEventListener("input", function() {
+        document.getElementById("erreur-immatriculation").textContent = "";
+    });
+
+    categorie.addEventListener("change", function() {
+        categorie.nextElementSibling.textContent = "";
+    });
+
+    prixJour.addEventListener("input", function() {
+        prixJour.nextElementSibling.textContent = "";
+    });
+
+    statut.addEventListener("change", function() {
+        statut.nextElementSibling.textContent = "";
+    });
+
     errors.forEach((error) => error.textContent = "");
 
+    
     if (marque.value.trim() === "") {
         marque.nextElementSibling.textContent = "La marque est obligatoire.";
+        
         valide = false;
     }
 
@@ -108,9 +134,8 @@ function formValidation() {
     }
 
     return valide;
+    
 }
-
-
 
 function addCard(){
     const car = {};
@@ -160,6 +185,7 @@ function showCars(carsTable){
         editBtn.setAttribute("aria-label", `Modifier ${car.marque} ${car.modele}, ${car.immatriculation}`);
         editBtn.addEventListener("click", () => {
             modifyForm(car);
+            errors.forEach((error) => error.textContent = "");
         });
 
         let deleteBtn = creatElem("button", "button button-delete", "Supprimer");
@@ -292,3 +318,34 @@ function sortCars(filtredCars){
     }
 }
 
+function filtrage(){
+    let filtredCars = rechercheCars();
+    filtredCars = filtreStatusCars(filtredCars);
+    filtredCars = filtreCategoryCars(filtredCars);
+    filtredCars = sortCars(filtredCars);
+    showCars(filtredCars);
+}
+
+recherche.addEventListener("input", ()=>{
+   filtrage();
+});
+
+filtreStatut.addEventListener("change", ()=>{
+    filtrage();
+});
+
+filtreCategorie.addEventListener("change", ()=>{
+    filtrage();
+});
+
+tri.addEventListener("change", ()=>{
+    filtrage();
+});
+
+boutonReset.addEventListener("click" ,() => {
+    recherche.value = "";
+    filtreStatut.value = "";
+    filtreCategorie.value = "";
+    tri.value = "";
+    showCars(cars);
+})
