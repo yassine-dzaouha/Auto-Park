@@ -1,6 +1,6 @@
 import {voituresInitiales} from "./data.js";
 let carsId = 7;
-let modifyId = null;
+let modifyId = {};
 
 if(!localStorage.getItem('cars')){
     localStorage.setItem("cars", JSON.stringify(voituresInitiales));
@@ -117,7 +117,7 @@ function formValidation() {
             }
         })
     }
-    console.log(valide)
+    console.log(valide);
     if (categorie.value.trim() === "") {
         categorie.nextElementSibling.textContent = "La catégorie est obligatoire.";
         valide = false;
@@ -132,7 +132,7 @@ function formValidation() {
         statut.nextElementSibling.textContent = "Le statut est obligatoire.";
         valide = false;
     }
-
+    
     return valide;
     
 }
