@@ -155,6 +155,11 @@ function addCard(){
 function showCars(carsTable){
     console.log(carsTable);
     carsList.textContent = "";
+    if(!carsTable.length){
+        document.getElementById("etat-vide").hidden = false;
+        return;
+    }
+    document.getElementById("etat-vide").hidden = true;
     carsTable.forEach((car)=>{
         let tr = creatElem("tr","","");
         
