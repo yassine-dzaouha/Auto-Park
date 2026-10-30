@@ -10,8 +10,11 @@
     <title>Gestion du parc · AutoPark</title>
     <link rel="icon" href="data:," />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+    <!-- <link href="css/output.css" rel="stylesheet"> -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script type="module" src="js/voitures.js"></script>
+
+    <!-- <script type="module" src="js/voitures.js"></script> -->
   </head>
   <body>
     <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -33,7 +36,88 @@
       </div>
     </header>
     
-    
+    <main class="mx-[5%] py-9.5">
+
+        <section class="mb-7">
+            <p class="eyebrow">VOTRE ESPACE DE STATISTIQUE</p>
+            <h1>Bonjour</h1>
+            <p>Voici un aperçu rapide de votre parc automobile.</p>
+        </section>
+
+        <section class="gap-10 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 ">
+
+            <div class="p-5 border-2 rounded-lg border-[#D8EBFF] bg-[#F0F7FF] flex gap-5 items-center">
+                <div><i class="fa-solid fa-car  text-[#0784F8] text-3xl"></i></div>
+                <div>
+                    <p>Total des véhicules</p>
+                    <h2>12</h2>
+                </div>
+            </div>
+
+            <div class="p-5 border-2 rounded-lg border-[#D8F0E8] bg-[#F0FAF6] flex gap-5 items-center">
+                <div><i class="fa-solid fa-circle-check text-[#00A862] text-3xl"></i></div>
+                <div>
+                    <p>Disponibles</p>
+                    <h2>7</h2>
+                </div>
+            </div>
+
+            <div class="p-5 border-2 rounded-lg border-[#FCE8D9] bg-[#FFF8F2] flex gap-5 items-center">
+                <div><i class="fa-solid fa-clock text-[#F36F00] text-3xl"></i></div>
+                <div>
+                    <p>Louées</p>
+                    <h2>4</h2>
+                </div>
+            </div>
+
+            <div class="p-5 border-2 rounded-lg border-[#FCE0E4] bg-[#FFF3F5] flex gap-5 items-center">
+                <div><i class="fa-solid fa-wrench text-[#E62F3E] text-3xl"></i></div>
+                <div>
+                    <p>En maintenance</p>
+                    <h2>1</h2>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="mt-5 bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
+
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h3 class="text-xl font-bold text-gray-800">Véhicules récents</h3>
+                    <p class="text-sm text-gray-500 mt-1">Liste des derniers véhicules ajoutés</p>
+                </div>
+
+                <a href="#" class="text-blue-600 text-sm font-semibold hover:underline">
+                    Voir tout →
+                </a>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left">
+                    <caption class="sr-only">
+                    Liste des voitures du parc et actions de gestion
+                    </caption>
+                    <thead class="bg-slate-800 text-white">
+                        <tr>
+                            <th class="px-5 py-4 rounded-tl-lg">Marque</th>
+                            <th class="px-5 py-4">Modèle</th>
+                            <th class="px-5 py-4">Immatriculation</th>
+                            <th class="px-5 py-4">Catégorie</th>
+                            <th class="px-5 py-4">Statut</th>
+                            <th class="px-5 py-4">Prix / Jour</th>
+                            <th class="px-5 py-4 rounded-tr-lg">Actions</th>
+                        </tr>
+                    </thead>
+                    <!-- Lignes de démonstration statiques : à remplacer par un affichage JS.
+                    data-id identifie la voiture ; data-action indique l'action. -->
+                    <tbody id="liste-voitures">
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+    </main>
     <footer class="site-footer container">
       <span>AutoPark</span>
       <p>Une gestion simple, un parc bien organisé.</p>
