@@ -14,7 +14,7 @@
     <!-- <link href="css/output.css" rel="stylesheet"> -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-    <!-- <script type="module" src="js/voitures.js"></script> -->
+    <script type="module" src="js/dashboard.js"></script>
   </head>
   <body>
     <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -50,7 +50,7 @@
                 <div><i class="fa-solid fa-car  text-[#0784F8] text-3xl"></i></div>
                 <div>
                     <p>Total des véhicules</p>
-                    <h2>12</h2>
+                    <h2 id="total-voitures">0</h2>
                 </div>
             </div>
 
@@ -58,7 +58,7 @@
                 <div><i class="fa-solid fa-circle-check text-[#00A862] text-3xl"></i></div>
                 <div>
                     <p>Disponibles</p>
-                    <h2>7</h2>
+                    <h2 id="voitures-disponibles">0</h2>
                 </div>
             </div>
 
@@ -66,7 +66,7 @@
                 <div><i class="fa-solid fa-clock text-[#F36F00] text-3xl"></i></div>
                 <div>
                     <p>Louées</p>
-                    <h2>4</h2>
+                    <h2 id="voitures-louees">0</h2>
                 </div>
             </div>
 
@@ -74,7 +74,7 @@
                 <div><i class="fa-solid fa-wrench text-[#E62F3E] text-3xl"></i></div>
                 <div>
                     <p>En maintenance</p>
-                    <h2>1</h2>
+                    <h2 id="voitures-maintenance">0</h2>
                 </div>
             </div>
 
@@ -108,10 +108,8 @@
                             <th class="px-5 py-4 rounded-tr-lg">Actions</th>
                         </tr>
                     </thead>
-                    <!-- Lignes de démonstration statiques : à remplacer par un affichage JS.
-                    data-id identifie la voiture ; data-action indique l'action. -->
-                    <tbody id="liste-voitures">
-                    </tbody>
+                    
+                    <tbody id="liste-voitures"></tbody>
                 </table>
             </div>
 
