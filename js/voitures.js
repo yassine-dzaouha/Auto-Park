@@ -1,5 +1,11 @@
 import {voituresInitiales} from "./data.js";
-let carsId = 7;
+
+if(!localStorage.getItem('id')){
+    localStorage.setItem("id", 7);
+}
+
+let carsId = Number(localStorage.getItem("id"))
+
 let modifyId = {};
 
 if(!localStorage.getItem('cars')){
@@ -21,12 +27,12 @@ const carsList = document.getElementById("liste-voitures");
 const cancelModifyBtn = document.getElementById("annuler-modification")
 const btn = document.getElementById("bouton-enregistrer");
 const formTitle = document.getElementById("titre-formulaire");
-let recherche = document.getElementById("recherche");
-let filtreStatut = document.getElementById("filtre-statut");
-let filtreCategorie = document.getElementById("filtre-categorie");
-let tri = document.getElementById("tri-prix");
-let boutonReset = document.getElementById("reinitialiser-filtres");
-let errors = document.querySelectorAll(".field-error");
+const recherche = document.getElementById("recherche");
+const filtreStatut = document.getElementById("filtre-statut");
+const filtreCategorie = document.getElementById("filtre-categorie");
+const tri = document.getElementById("tri-prix");
+const boutonReset = document.getElementById("reinitialiser-filtres");
+const errors = document.querySelectorAll(".field-error");
 
 showCars(cars);
 
@@ -48,11 +54,11 @@ function sumbitCar(){
         return;
     }
     
-    if(modifyId){
+    if(modifyId.id){
         editCar(modifyId);
     }
     else {
-         addCard();
+         addCar();
     }
     
 }
@@ -137,7 +143,7 @@ function formValidation() {
     
 }
 
-function addCard(){
+function addCar(){
     const car = {};
     car.id = carsId++;
     car.marque = marque.value.trim();
@@ -148,13 +154,19 @@ function addCard(){
     car.statut = statut.value;
     cars.push(car);
 
-    localStorage.setItem("cars", JSON.stringify(cars))
+    localStorage.setItem("cars", JSON.stringify(cars));
+    localStorage.setItem("id", carsId);
     form.reset();
 }
 
 function showCars(carsTable){
     console.log(carsTable);
     carsList.textContent = "";
+    if(!carsTable.length){
+        document.getElementById("etat-vide").hidden = false;
+        return;
+    }
+    document.getElementById("etat-vide").hidden = true;
     carsTable.forEach((car)=>{
         let tr = creatElem("tr","","");
         
