@@ -207,3 +207,20 @@ function showDates() {
     }
 }
 
+function showPrices(){
+    let debut = new Date(selectedConfig.dateDebut);
+    let fin = new Date(selectedConfig.dateFin);
+    let days = Math.round((fin - debut) / 86400000) + 1;
+    console.log(days);
+    let total = days * carObj.prixJour;
+    document.getElementById("nombreJour").textContent = `${days} jour · dates incluses`;
+    carPrice.textContent = `Véhicule · ${days} × ${carObj.prixJour} MAD`;
+    totalCarPrice.textContent = `${total} MAD`;
+}
+
+start.addEventListener("change", showDates);
+end.addEventListener("change", showDates);
+
+// function totalPrice(){
+    
+// }
