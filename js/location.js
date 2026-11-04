@@ -156,8 +156,6 @@ function showCars() {
 
 }
 
-
-
 const start = document.querySelector("#start");
 const end = document.querySelector("#end");
 const small = document.querySelector("#dateError");
@@ -166,4 +164,46 @@ const voitureMarque = document.getElementById("VoitureMarque");
 const voiturePrix = document.getElementById("voiturePrix");
 const carPrice = document.getElementById("carPrice");
 const totalCarPrice = document.getElementById("totalCarPrice");
+
+function validation(){
+    let valid = false;
+    radios.forEach(radio=>{
+        if(radio.checked){
+            valid = true;
+        }
+    })
+    let today = new Date();
+    let startMin = today.toISOString().split("T")[0];
+    start.min = startMin;
+
+    today.setDate(today.getDate() + 2);
+    let endMin = today.toISOString().split("T")[0];
+    end.min = endMin;
+
+    if(!valid) valid = false;
+    if (!start.value || !end.value) valid = false;
+    selectedConfig.dateDebut = start.value;
+    selectedConfig.dateFin = end.value;
+    return valid;
+}
+
+
+function showCarDetails(car) {
+    voitureMarque.textContent = `${car.marque} ${car.modele}`;
+    voiturePrix.textContent = `${car.categorie} · ${car.prixJour} MAD / jour`;
+}
+
+function showDates() {
+    if(!validation()){
+        return;
+    }
+    const d1 = new Date(selectedConfig.dateDebut);
+    const d2 = new Date(selectedConfig.dateFin);
+    console.log(d1,d2)
+    const opts = { day: "numeric", month: "long", year: "numeric" };
+    document.getElementById("dateDebutFin").textContent = `${d1.getDate()} → ${d2.toLocaleDateString("fr-FR", opts)}`;
+    if(carObj){
+        showPrices();
+    }
+}
 
