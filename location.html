@@ -1,41 +1,35 @@
 <!doctype html>
 <html lang="fr">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="AutoPark — Interface de gestion du parc automobile Atlas Auto."
-    />
+    <meta name="description" content="AutoPark — Interface de gestion du parc automobile Atlas Auto." />
     <title>Gestion du parc · AutoPark</title>
     <link rel="icon" href="data:," />
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     <!-- <link href="css/output.css" rel="stylesheet"> -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <script type="module" src="js/location.js"></script>
-  </head>
-  <body>
+</head>
+
+<body>
     <a class="skip-link" href="#contenu">Aller au contenu</a>
     <header class="site-header">
-      <div class="container header-content">
-        <a
-          class="brand"
-          href="voitures.html"
-          aria-label="AutoPark — Gestion du parc"
-        >
-          <span class="brand-mark" aria-hidden="true">A<span>.</span></span>
-          <span>AutoPark<small>ATLAS AUTO</small></span>
-        </a>
-        <nav aria-label="Navigation principale">
-          <!-- index.html est le dashboard à créer par l'apprenant. -->
-          <a href="index.html">Dashboard</a>
-          <a href="voitures.html">Gestion du parc</a>
-          <a href="location.html" aria-current="page">Ma Location</a>
-        </nav>
-        <span class="agency-label">Agence de location</span>
-      </div>
+        <div class="container header-content">
+            <a class="brand" href="voitures.html" aria-label="AutoPark — Gestion du parc">
+                <span class="brand-mark" aria-hidden="true">A<span>.</span></span>
+                <span>AutoPark<small>ATLAS AUTO</small></span>
+            </a>
+            <nav aria-label="Navigation principale">
+                <a href="index.html">Dashboard</a>
+                <a href="voitures.html">Gestion du parc</a>
+                <a href="location.html" aria-current="page">Ma Location</a>
+            </nav>
+            <span class="agency-label">Agence de location</span>
+        </div>
     </header>
     <main class="mx-[5%] py-9.5">
         <section class="mb-7">
@@ -43,30 +37,109 @@
             <h1 class="font-bold">Composez votre location</h1>
             <p class="text-[#697C94]">Votre voiture, vos dates, vos options. À vous de choisir.</p>
         </section>
-        <section class="text-[#697C94] font-bold px-10 p-5 bg-[#FFFFFF] border border-solid rounded-lg flex border-[#D8E1EF] justify-between text-[12px]">
-            <div class="flex gap-3 items-center text-[#2852E3] ">
+        <section id="progression"
+            class="text-[#697C94] font-bold p-5 bg-[#FFFFFF] border border-solid rounded-xl flex border-[#D8E1EF] justify-between text-[10px]">
+            <div class="flex flex-col gap-3 items-center text-[#2852E3] md:flex-row">
                 <p class="px-2.5 py-1 rounded-[25px] bg-[#2852E3] text-[#FFFFFF]">1</p>
                 <p>Véhicule</p>
             </div>
-            <div class="flex gap-3 items-center">
+            <div class="flex flex-col gap-3 items-center md:flex-row">
                 <p class="px-2.5 py-1 rounded-[25px] bg-[#F4F6FA]">2</p>
                 <p>Récupération</p>
             </div>
-            <div class="flex gap-3 items-center">
+            <div class="flex flex-col gap-3 items-center md:flex-row">
                 <p class="px-2.5 py-1 rounded-[25px] bg-[#F4F6FA]">3</p>
                 <p>Options</p>
             </div>
-            <div class="flex gap-3 items-center">
+            <div class="flex flex-col gap-3 items-center md:flex-row">
                 <p class="px-2.5 py-1 rounded-[25px] bg-[#F4F6FA]">4</p>
                 <p>Récapitulatif</p>
             </div>
         </section>
-        
+        <section class="mt-8 flex gap-5 ">
+            <section class="flex-2 p-5 bg-[#FFFFFF] border rounded-xl border-[#D8E1EF] text-[10px]">
+                <div class="mb-7">
+                    <p class="text-[#2852E3] pb-5">01 / VÉHICULE</p>
+                    <h3 class="font-bold my-5 text-lg">Choisissez votre véhicule</h3>
+                    <p class="text-[#697C94]">Sélectionnez une voiture disponible et votre période de location.</p>
+                </div>
+                <div id="voiture_div" class="pb-5 border-b border-[#D8E1EF] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+                    
+                </div>
+                <div class="pt-5">
+                    <h2 class="text-base font-bold text-slate-900 mb-5">Votre période de location</h2>
+                    <div class="pt-4 grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                            <label for="start" class="block text-sm font-medium text-slate-900 mb-2">
+                            Date de début <span>*</span>
+                            </label>
+                            <input id="start" type="date" value="10/11/2026" class="w-full rounded-lg border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600" />
+                        </div>
+                    
+                        <div>
+                            <label for="end" class="block text-sm font-medium text-slate-900 mb-2"> Date de fin <span>*</span></label>
+                            <input id="end" type="date" value="12/11/2026" class="w-full rounded-lg border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600"/>
+                        </div>
+                        <small id="dateError" class="text-[red]"></small>
+                    </div>
+                
+                    <div class="mt-5 rounded-lg bg-blue-50 px-4 py-3.5 text-xs text-blue-600">
+                        Durée : 3 jours. Les dates de début et de fin sont incluses.
+                    </div>
+                
+                    <hr class="my-6 border-slate-200" />
+                
+                    <div class="flex items-center justify-between gap-4">
+                        <button type="button" class="rounded-lg !border !border-[#D8E1EF] bg-white px-8 py-3.5 text-sm font-bold text-slate-900 hover:bg-slate-50 focus:ring-2 focus:ring-blue-600">Recommencer</button>
+                        <button type="button" class="rounded-lg bg-blue-600 px-14 py-3.5 text-sm font-bold text-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2">Suivant</button>
+                    </div>
+                </div>
+                
+            </section>
+            <aside class="h-fit w-full max-w-sm rounded-xl border border-[#D8E1EF] bg-white p-7">
+                <div class="flex flex-col gap-3 mb-3 pb-3 border-b border-[#D8E1EF]">
+                    <p class="text-xs font-medium uppercase text-blue-600">Votre location</p>
+                    <h2 id="VoitureMarque" class="mt-4 text-2xl font-bold text-slate-900">___</h2>
+                    <p id="voiturePrix" class="mt-4 text-sm text-slate-500">__ · __ MAD / jour</p>
+                </div>
+                <div class="leading-15">
+                    <p id="dateDebutFin" class="text-[15px] font-bold text-slate-900">date</p>
+                    <p id="nombreJour" class="mt-3 text-sm text-slate-500">___ · dates incluses</p>
+                        <div class="flex items-center justify-between">
+                            <p id="carPrice" class="text-slate-500">Véhicule · ---</p>
+                            <p id="totalCarPrice" class="font-bold text-slate-900">___ MAD</p>
+                        </div>
+                        <div id="selectedVoiture" class="flex items-center justify-between">
+                            <p class="text-slate-500"></p>
+                            <p class="font-bold text-slate-900"></p>
+                        </div>
+                        <div id="bebe" class="flex items-center justify-between">
+                            <p class="text-slate-500"></p>
+                            <p class="font-bold text-slate-900"></p>
+                        </div>
+                </div>
+            
+                <hr class="my-5 border-[#D8E1EF]" />
+            
+                <div id="recup" class="mb-5 flex items-center justify-between">
+                    <span class="text-sm font-bold text-slate-900">Total estimé</span>
+                    <span class="text-3xl font-bold text-blue-600">__ MAD</span>
+                </div>
+            
+                <p class="mt-5 text-xs text-slate-500">Frais de récupération facturés une seule fois.</p>
+            
+                <div class="mt-4 rounded-lg bg-slate-100 px-4 py-3.5 text-xs text-slate-500">
+                Une demande, sans paiement en ligne.
+                </div>
+            </aside>
+        </section>
+
     </main>
 
     <footer class="site-footer container">
-      <span>AutoPark</span>
-      <p>Une gestion simple, un parc bien organisé.</p>
+        <span>AutoPark</span>
+        <p>Une gestion simple, un parc bien organisé.</p>
     </footer>
-  </body>
+</body>
+
 </html>
