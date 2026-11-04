@@ -188,3 +188,22 @@ function validation(){
 }
 
 
+function showCarDetails(car) {
+    voitureMarque.textContent = `${car.marque} ${car.modele}`;
+    voiturePrix.textContent = `${car.categorie} · ${car.prixJour} MAD / jour`;
+}
+
+function showDates() {
+    if(!validation()){
+        return;
+    }
+    const d1 = new Date(selectedConfig.dateDebut);
+    const d2 = new Date(selectedConfig.dateFin);
+    console.log(d1,d2)
+    const opts = { day: "numeric", month: "long", year: "numeric" };
+    document.getElementById("dateDebutFin").textContent = `${d1.getDate()} → ${d2.toLocaleDateString("fr-FR", opts)}`;
+    if(carObj){
+        showPrices();
+    }
+}
+
