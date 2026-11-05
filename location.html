@@ -37,27 +37,26 @@
             <h1 class="font-bold">Composez votre location</h1>
             <p class="text-[#697C94]">Votre voiture, vos dates, vos options. À vous de choisir.</p>
         </section>
-        <section id="progression"
-            class="text-[#697C94] font-bold p-5 bg-[#FFFFFF] border border-solid rounded-xl flex border-[#D8E1EF] justify-between text-[10px]">
-            <div class="flex flex-col gap-3 items-center text-[#2852E3] md:flex-row">
+        <section id="progression" class="text-[#697C94] font-bold p-5 bg-[#FFFFFF] border border-solid rounded-xl flex border-[#D8E1EF] justify-between text-[10px]">
+            <div class="steps flex flex-col gap-3 items-center text-[#2852E3] md:flex-row">
                 <p class="px-2.5 py-1 rounded-[25px] bg-[#2852E3] text-[#FFFFFF]">1</p>
                 <p>Véhicule</p>
             </div>
-            <div class="flex flex-col gap-3 items-center md:flex-row">
+            <div class="steps flex flex-col gap-3 items-center md:flex-row">
                 <p class="px-2.5 py-1 rounded-[25px] bg-[#F4F6FA]">2</p>
                 <p>Récupération</p>
             </div>
-            <div class="flex flex-col gap-3 items-center md:flex-row">
+            <div class="steps flex flex-col gap-3 items-center md:flex-row">
                 <p class="px-2.5 py-1 rounded-[25px] bg-[#F4F6FA]">3</p>
                 <p>Options</p>
             </div>
-            <div class="flex flex-col gap-3 items-center md:flex-row">
+            <div class="steps flex flex-col gap-3 items-center md:flex-row">
                 <p class="px-2.5 py-1 rounded-[25px] bg-[#F4F6FA]">4</p>
                 <p>Récapitulatif</p>
             </div>
         </section>
         <section class="mt-8 flex gap-5 ">
-            <section class="flex-2 p-5 bg-[#FFFFFF] border rounded-xl border-[#D8E1EF] text-[10px]">
+            <section id="etape1" class="flex-2 p-5 bg-[#FFFFFF] border rounded-xl border-[#D8E1EF] text-[10px]">
                 <div class="mb-7">
                     <p class="text-[#2852E3] pb-5">01 / VÉHICULE</p>
                     <h3 class="font-bold my-5 text-lg">Choisissez votre véhicule</h3>
@@ -90,13 +89,55 @@
                     <hr class="my-6 border-slate-200" />
                 
                     <div class="flex items-center justify-between gap-4">
-                        <button type="button" class="rounded-lg !border !border-[#D8E1EF] bg-white px-8 py-3.5 text-sm font-bold text-slate-900 hover:bg-slate-50 focus:ring-2 focus:ring-blue-600">Recommencer</button>
-                        <button type="button" class="rounded-lg bg-blue-600 px-14 py-3.5 text-sm font-bold text-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2">Suivant</button>
+                        <button id="recommencer" type="button" class="rounded-lg !border !border-[#D8E1EF] bg-white px-8 py-3.5 text-sm font-bold text-slate-900 hover:bg-slate-50 focus:ring-2 focus:ring-blue-600">Recommencer</button>
+                        <button id="Suivant" type="button" class="rounded-lg bg-blue-600 px-14 py-3.5 text-sm font-bold text-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2">Suivant</button>
                     </div>
                 </div>
                 
             </section>
-            
+            <section id="etape2" class="hidden flex-2 p-5 bg-[#FFFFFF] border rounded-xl border-[#D8E1EF] text-[10px]">
+    
+                <div class="mb-7">
+                    <p class="text-[#2852E3] pb-5">02 / RÉCUPÉRATION</p>
+                    <h3 class="font-bold my-5 text-lg">Où récupérer votre voiture ?</h3>
+                    <p class="text-[#697C94]">Choisissez le lieu qui vous convient.</p>
+                </div>
+    
+                <div id="recuperation_div" class="pb-5 border-b border-[#D8E1EF] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+    
+                    <!-- <label for="agence" class="cursor-pointer">
+                        <div class="card p-4 border border-[#D8E1EF] rounded-xl bg-white transition-all has-[:checked]:border-2 has-[:checked]:border-[#2852E3] has-[:checked]:bg-[#F8FAFF]">
+                            <input type="radio" name="recuperation" id="agence" value="agence" checked class="!w-5 !h-5 !p-0 !m-0 mb-3 accent-[#2852E3] cursor-pointer" />
+                            <h3 class="text-[#263A50] text-xs font-bold mb-2">À l’agence</h3>
+                            <p class="text-[#2852E3] text-[10px] font-bold">Gratuit</p>
+                        </div>
+                    </label> -->
+                </div>
+    
+                <div class="pt-5">
+                    <h2 class="text-base font-bold text-slate-900 mb-5">Informations de récupération</h2>
+    
+                    <div>
+                        <label for="heureRecuperation" class="block text-sm font-medium text-slate-900 mb-2">
+                            Heure de récupération <span>*</span>
+                        </label>
+                        <input id="heureRecuperation" type="time"  required class="w-full rounded-lg border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600" />
+                        <small id="recuperationError" class="text-[red]"></small>
+                    </div>
+    
+                    <div class="mt-5 rounded-lg bg-blue-50 px-4 py-3.5 text-xs text-blue-600">
+                        Le supplément de récupération est ajouté une seule fois au total.
+                    </div>
+    
+                    <hr class="my-6 border-slate-200" />
+    
+                    <div class="flex items-center justify-between gap-4">
+                        <button type="button" id="btnPrecedent" class="rounded-lg !border !border-[#D8E1EF] bg-white px-8 py-3.5 text-sm font-bold text-slate-900 hover:bg-slate-50 focus:ring-2 focus:ring-blue-600">Précédent</button>
+                        <button type="button" id="btnSuivant2" class="rounded-lg bg-blue-600 px-14 py-3.5 text-sm font-bold text-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2">Suivant</button>
+                    </div>
+                </div>
+    
+            </section>
             <aside class="h-fit w-full max-w-sm rounded-xl border border-[#D8E1EF] bg-white p-7">
                 <div class="flex flex-col gap-3 mb-3 pb-3 border-b border-[#D8E1EF]">
                     <p class="text-xs font-medium uppercase text-blue-600">Votre location</p>

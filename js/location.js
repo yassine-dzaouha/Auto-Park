@@ -105,7 +105,23 @@ let carObj = null;
  * → 3 × (250 + 30) + 150 = 990 MAD.
  */
 
+
+
+// ------------------------ step 1 ----------------------
 const cars_div = document.getElementById("voiture_div");
+const start = document.querySelector("#start");
+const end = document.querySelector("#end");
+const small = document.querySelector("#dateError");
+const radios = document.querySelectorAll("input[type='radio']")
+const voitureMarque = document.getElementById("VoitureMarque");
+const voiturePrix = document.getElementById("voiturePrix");
+const carPrice = document.getElementById("carPrice");
+const totalCarPrice = document.getElementById("totalCarPrice");
+const total = document.getElementById("totalPrice");
+const recommenceBtn = document.getElementById("recommencer");
+const suivantbtn = document.getElementById("Suivant");
+const etape1 = document.getElementById("etape1");
+const etape2 = document.getElementById("etape2");
 showCars();
 
 function createElement(tag, className = "", text = "", attrs = {}) {
@@ -137,11 +153,13 @@ function showCars() {
             carObj = car;
         }
         if (radio.checked) {
-            showCarDetails(car);
-        }
-        if(!(selectedConfig.dateDebut == "" || selectedConfig.dateFin == "")){
+            validation();
+            showCarDetails();
+            if(!(selectedConfig.dateDebut == "" || selectedConfig.dateFin == "")){
             showPrices();
         }
+        }
+        
     });
     header.append(category, radio);
 
@@ -156,34 +174,93 @@ function showCars() {
 
 }
 
-const start = document.querySelector("#start");
-const end = document.querySelector("#end");
-const small = document.querySelector("#dateError");
-const radios = document.querySelectorAll("input[type='radio']")
-const voitureMarque = document.getElementById("VoitureMarque");
-const voiturePrix = document.getElementById("voiturePrix");
-const carPrice = document.getElementById("carPrice");
-const totalCarPrice = document.getElementById("totalCarPrice");
+suivantbtn.addEventListener("click", () => {
+    if (!validation()) return;
+ 
+    selectedConfig.etape = 2;
+    etape1.classList.add("hidden");
+    etape2.classList.remove("hidden");
+ 
+    document.querySelectorAll(".steps").forEach((step, i) => {
+        const active = i < selectedConfig.etape;
+        const number = step.querySelector("p");
+        if(i < selectedConfig.etape - 1){
+            number.textContent = "✓";
+        }else{
+            number.textContent = i + 1;
+        }
+        if (active) {
+            step.classList.add("text-[#2852E3]");
+            number.classList.add("bg-[#2852E3]", "text-[#FFFFFF]");
+            number.classList.remove("bg-[#F4F6FA]");
+        } else {
+            step.classList.remove("text-[#2852E3]");
+            number.classList.remove("bg-[#2852E3]", "text-[#FFFFFF]");
+            number.classList.add("bg-[#F4F6FA]");
+        }
+    });
+});
+
+
+recommenceBtn.addEventListener("click", () => {
+
+    selectedConfig.voitureId = null;
+    selectedConfig.dateDebut = "";
+    selectedConfig.dateFin = "";
+    carObj = null;
+ 
+    radios.forEach((r) => (r.checked = false));
+    document.querySelectorAll(".card").forEach((c) => c.classList.remove("!border-[#2852E3]"));
+    start.value = "";
+    end.value = "";
+ 
+    voitureMarque.textContent = "___";
+    voiturePrix.textContent = "__ · __ MAD / jour";
+    document.getElementById("dateDebutFin").textContent = "date";
+    document.getElementById("nombreJour").textContent = "___ · dates incluses";
+    carPrice.textContent = "Véhicule · ---";
+    totalCarPrice.textContent = "__ MAD";
+    total.textContent = "__ MAD";
+});
+
+let today = new Date();
+let startMin = today.toISOString().split("T")[0];
+console.log(today.toISOString())
+start.min = startMin;
 
 function validation(){
-    let valid = false;
+    let valid = true;
     radios.forEach(radio=>{
         if(radio.checked){
             valid = true;
         }
     })
-    let today = new Date();
-    let startMin = today.toISOString().split("T")[0];
-    start.min = startMin;
-
-    today.setDate(today.getDate() + 2);
-    let endMin = today.toISOString().split("T")[0];
-    end.min = endMin;
 
     if(!valid) valid = false;
-    if (!start.value || !end.value) valid = false;
+    if (!start.value) {
+        valid = false;
+        end.disabled = true;
+    }else{
+        end.disabled = false;
+        let endMin = new Date(start.value);
+        endMin.setDate(endMin.getDate() + 2);
+        endMin = endMin.toISOString().split("T")[0];
+        end.min = endMin;
+    }
+
     selectedConfig.dateDebut = start.value;
+    if(!end.value){
+        valid = false;
+    }
     selectedConfig.dateFin = end.value;
+    
+    
+    if(!valid){
+        suivantbtn.disabled = true;
+    }
+    else{
+        suivantbtn.disabled = false;
+    }
     return valid;
 }
 
@@ -202,7 +279,7 @@ function showDates() {
     console.log(d1,d2)
     const opts = { day: "numeric", month: "long", year: "numeric" };
     document.getElementById("dateDebutFin").textContent = `${d1.getDate()} → ${d2.toLocaleDateString("fr-FR", opts)}`;
-    if(carObj){
+    if(carObj && selectedConfig.dateDebut != "" && selectedConfig.dateFin != ""){
         showPrices();
     }
 }
@@ -228,13 +305,56 @@ end.addEventListener("change", ()=>{
 });
 
 function showTotal() {
-    const total = document.getElementById("totalPrice");
-
     if (!carObj || !selectedConfig.dateDebut || !selectedConfig.dateFin) {
         total.textContent = "__ MAD";
         return;
     }
-
     const days = Math.round((new Date(selectedConfig.dateFin) - new Date(selectedConfig.dateDebut)) / 86400000) + 1;
     total.textContent = `${days * carObj.prixJour} MAD`;
+}
+
+
+// ------------------------ step 2 ----------------------
+
+const recuperation_div = document.getElementById("recuperation_div");
+
+
+showRecuperation()
+function showRecuperation() {
+    recuperation_div.textContent = "";
+ 
+    config.modesRecuperation.forEach((mode) => {
+        const label = createElement("label", "cursor-pointer", "", { for: mode.id });
+ 
+        const card = createElement(
+            "div",
+            "card-recup p-4 border border-[#D8E1EF] rounded-xl bg-white transition-all " +
+            "has-[:checked]:border-2 has-[:checked]:border-[#2852E3] has-[:checked]:bg-[#F8FAFF]"
+        );
+ 
+        const radio = createElement("input", "!w-5 !h-5 !p-0 !m-0 mb-3 accent-[#2852E3] cursor-pointer", "", {
+            type: "radio",
+            name: "recuperation",
+            id: mode.id,
+            value: mode.id,
+        });
+        radio.checked = mode.id === selectedConfig.modeRecuperation; // "agence" by default
+ 
+        radio.addEventListener("change", () => {
+            if (radio.checked) {
+                selectedConfig.modeRecuperation = mode.id;
+            }
+        });
+ 
+        const nom = createElement("h3", "text-[#263A50] text-xs font-bold mb-2", mode.nom);
+        const frais = createElement(
+            "p",
+            "text-[#2852E3] text-[10px] font-bold",
+            mode.fraisFixes ? `+${mode.fraisFixes} MAD` : "Gratuit"
+        );
+ 
+        card.append(radio, nom, frais);
+        label.append(card);
+        recuperation_div.append(label);
+    });
 }
