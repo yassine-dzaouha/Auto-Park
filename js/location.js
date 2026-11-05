@@ -218,9 +218,23 @@ function showPrices(){
     totalCarPrice.textContent = `${total} MAD`;
 }
 
-start.addEventListener("change", showDates);
-end.addEventListener("change", showDates);
+start.addEventListener("change",()=>{
+    showDates();
+    showTotal();
+});
+end.addEventListener("change", ()=>{
+    showDates();
+    showTotal();
+});
 
-// function totalPrice(){
-    
-// }
+function showTotal() {
+    const total = document.getElementById("totalPrice");
+
+    if (!carObj || !selectedConfig.dateDebut || !selectedConfig.dateFin) {
+        total.textContent = "__ MAD";
+        return;
+    }
+
+    const days = Math.round((new Date(selectedConfig.dateFin) - new Date(selectedConfig.dateDebut)) / 86400000) + 1;
+    total.textContent = `${days * carObj.prixJour} MAD`;
+}
