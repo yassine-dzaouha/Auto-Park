@@ -37,34 +37,33 @@
             <h1 class="font-bold">Composez votre location</h1>
             <p class="text-[#697C94]">Votre voiture, vos dates, vos options. À vous de choisir.</p>
         </section>
-        <section id="progression"
-            class="text-[#697C94] font-bold p-5 bg-[#FFFFFF] border border-solid rounded-xl flex border-[#D8E1EF] justify-between text-[10px]">
-            <div class="flex flex-col gap-3 items-center text-[#2852E3] md:flex-row">
+        <section id="progression" class="text-[#697C94] font-bold p-5 bg-[#FFFFFF] border border-solid rounded-xl flex border-[#D8E1EF] justify-between text-[10px]">
+            <div class="steps flex flex-col gap-3 items-center text-[#2852E3] md:flex-row">
                 <p class="px-2.5 py-1 rounded-[25px] bg-[#2852E3] text-[#FFFFFF]">1</p>
                 <p>Véhicule</p>
             </div>
-            <div class="flex flex-col gap-3 items-center md:flex-row">
+            <div class="steps flex flex-col gap-3 items-center md:flex-row">
                 <p class="px-2.5 py-1 rounded-[25px] bg-[#F4F6FA]">2</p>
                 <p>Récupération</p>
             </div>
-            <div class="flex flex-col gap-3 items-center md:flex-row">
+            <div class="steps flex flex-col gap-3 items-center md:flex-row">
                 <p class="px-2.5 py-1 rounded-[25px] bg-[#F4F6FA]">3</p>
                 <p>Options</p>
             </div>
-            <div class="flex flex-col gap-3 items-center md:flex-row">
+            <div class="steps flex flex-col gap-3 items-center md:flex-row">
                 <p class="px-2.5 py-1 rounded-[25px] bg-[#F4F6FA]">4</p>
                 <p>Récapitulatif</p>
             </div>
         </section>
         <section class="mt-8 flex gap-5 ">
-            <section class="flex-2 p-5 bg-[#FFFFFF] border rounded-xl border-[#D8E1EF] text-[10px]">
+            <!-- ------------------step 1----------------- -->
+            <section id="etape1" class="etape flex-2 p-5 bg-[#FFFFFF] border rounded-xl border-[#D8E1EF] text-[10px]">
                 <div class="mb-7">
                     <p class="text-[#2852E3] pb-5">01 / VÉHICULE</p>
                     <h3 class="font-bold my-5 text-lg">Choisissez votre véhicule</h3>
                     <p class="text-[#697C94]">Sélectionnez une voiture disponible et votre période de location.</p>
                 </div>
                 <div id="voiture_div" class="pb-5 border-b border-[#D8E1EF] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-                    
                 </div>
                 <div class="pt-5">
                     <h2 class="text-base font-bold text-slate-900 mb-5">Votre période de location</h2>
@@ -82,21 +81,143 @@
                         </div>
                         <small id="dateError" class="text-[red]"></small>
                     </div>
-                
                     <div class="mt-5 rounded-lg bg-blue-50 px-4 py-3.5 text-xs text-blue-600">
                         Durée : 3 jours. Les dates de début et de fin sont incluses.
                     </div>
-                
                     <hr class="my-6 border-slate-200" />
-                
                     <div class="flex items-center justify-between gap-4">
-                        <button type="button" class="rounded-lg !border !border-[#D8E1EF] bg-white px-8 py-3.5 text-sm font-bold text-slate-900 hover:bg-slate-50 focus:ring-2 focus:ring-blue-600">Recommencer</button>
-                        <button type="button" class="rounded-lg bg-blue-600 px-14 py-3.5 text-sm font-bold text-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2">Suivant</button>
+                        <button id="recommencer" type="button" class="rounded-lg !border !border-[#D8E1EF] bg-white px-8 py-3.5 text-sm font-bold text-slate-900 hover:bg-slate-50 focus:ring-2 focus:ring-blue-600">Recommencer</button>
+                        <button id="Suivant" type="button" class="suivant rounded-lg bg-blue-600 px-14 py-3.5 text-sm font-bold text-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2">Suivant</button>
                     </div>
                 </div>
-                
             </section>
-            
+            <!-- ------------------------step 2----------------------- -->
+            <section id="etape2" class="etape hidden flex-2 p-5 bg-[#FFFFFF] border rounded-xl border-[#D8E1EF] text-[10px]">
+    
+                <div class="mb-7">
+                    <p class="text-[#2852E3] pb-5">02 / RÉCUPÉRATION</p>
+                    <h3 class="font-bold my-5 text-lg">Où récupérer votre voiture ?</h3>
+                    <p class="text-[#697C94]">Choisissez le lieu qui vous convient.</p>
+                </div>
+    
+                <div id="recuperation_div" class="pb-5 border-b border-[#D8E1EF] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+    
+                    <!-- <label for="agence" class="cursor-pointer">
+                        <div class="card p-4 border border-[#D8E1EF] rounded-xl bg-white transition-all has-[:checked]:border-2 has-[:checked]:border-[#2852E3] has-[:checked]:bg-[#F8FAFF]">
+                            <input type="radio" name="recuperation" id="agence" value="agence" checked class="!w-5 !h-5 !p-0 !m-0 mb-3 accent-[#2852E3] cursor-pointer" />
+                            <h3 class="text-[#263A50] text-xs font-bold mb-2">À l’agence</h3>
+                            <p class="text-[#2852E3] text-[10px] font-bold">Gratuit</p>
+                        </div>
+                    </label> -->
+                </div>
+    
+                <div class="pt-5">
+                    <h2 class="text-base font-bold text-slate-900 mb-5">Informations de récupération</h2>
+                    
+                    <!-- agence -->
+                    <div id="formAgence" class="hidde">
+                        <label for="heureRecuperation" class="block text-sm font-medium text-slate-900 mb-2">
+                            Heure de récupération <span>*</span>
+                        </label>
+                        <input id="heureRecuperation" type="time"  required class="w-full rounded-lg border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600" />
+                        <small id="recuperationError" class="text-[red]"></small>
+                    </div>
+                    <!-- Airport -->
+                    <div id="formAeroport" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div class="sm:col-span-2">
+                            <label for="aeroport_select" class="block text-sm font-medium text-slate-900 mb-2">
+                                Aéroport <span>*</span>
+                            </label>
+                            <select id="aeroport_select" required class="w-full rounded-lg border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600">
+                                <option value="">Choisissez un aéroport</option>
+                                <option value="Casablanca — Mohammed V">Casablanca — Mohammed V</option>
+                                <option value="Rabat — Salé">Rabat — Salé</option>
+                                <option value="Marrakech — Ménara">Marrakech — Ménara</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="numeroVol" class="block text-sm font-medium text-slate-900 mb-2">
+                                Numéro du vol <span>*</span>
+                            </label>
+                            <input id="numeroVol" type="text" placeholder="AT 205" required class="w-full rounded-lg border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600" />
+                        </div>
+                        <div>
+                            <label for="heureArrivee" class="block text-sm font-medium text-slate-900 mb-2">
+                                Heure d’arrivée <span>*</span>
+                            </label>
+                            <input id="heureArrivee" type="time" required class="w-full rounded-lg border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600" />
+                        </div>
+
+                        <small id="aeroportError" class="text-[red] sm:col-span-2"></small>
+                    </div>
+
+                    <!-- adress -->
+                    <div id="formAdresse" class="hidden flex flex-col gap-5">
+                        <div>
+                            <label for="ville" class="block text-sm font-medium text-slate-900 mb-2">
+                                Ville <span>*</span>
+                            </label>
+                            <input id="ville" type="text" placeholder="Casablanca" required class="w-full rounded-lg border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600" />
+                        </div>
+                        <div>
+                            <label for="adresse_input" class="block text-sm font-medium text-slate-900 mb-2">
+                                Adresse complète <span>*</span>
+                            </label>
+                            <input id="adresse_input" type="text" placeholder="24, boulevard Zerktouni" required class="w-full rounded-lg border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600" />
+                        </div>
+                        <div>
+                            <label for="heureLivraison" class="block text-sm font-medium text-slate-900 mb-2">
+                                Heure de livraison <span>*</span>
+                            </label>
+                            <input id="heureLivraison" type="time" required class="w-full rounded-lg border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600" />
+                        </div>
+                        <small id="adresseError" class="text-[red] text-2xl"></small>
+                    </div>
+                    <div class="mt-5 rounded-lg bg-blue-50 px-4 py-3.5 text-xs text-blue-600">
+                        Le supplément de récupération est ajouté une seule fois au total.
+                    </div>
+    
+                    <hr class="my-6 border-slate-200" />
+    
+                    <div class="flex items-center justify-between gap-4">
+                        <button type="button" id="btnPrecedent" class="btn-precedent rounded-lg !border !border-[#D8E1EF] bg-white px-8 py-3.5 text-sm font-bold text-slate-900 hover:bg-slate-50 focus:ring-2 focus:ring-blue-600">Précédent</button>
+                        <button type="button" id="btnSuivant2" class="suivant rounded-lg bg-blue-600 px-14 py-3.5 text-sm font-bold text-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2">Suivant</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ------------------step 3----------------- -->
+            <section id="etape3" class="hidden etape flex-2 p-5 bg-[#FFFFFF] border rounded-xl border-[#D8E1EF] text-[10px]">
+            <div class="mb-7">
+                <p class="text-[#2852E3] pb-5">03 / OPTIONS</p>
+                <h3 class="font-bold my-5 text-lg">Les petits plus de votre location</h3>
+                <p class="text-[#697C94]">Ces options sont facultatives et facturées par jour.</p>
+            </div>
+
+            <div id="options_div" class="flex flex-col gap-3">
+ 
+                <!-- <label for="siegeBebe" class="cursor-pointer">
+                    <div class="card-option flex items-start gap-3 p-4 border border-[#D8E1EF] rounded-xl bg-white transition-all has-[:checked]:border-2 has-[:checked]:border-[#2852E3] has-[:checked]:bg-[#F8FAFF]">
+                        <input type="checkbox" id="siegeBebe" value="siegeBebe" checked class="!w-5 !h-5 !p-0 !m-0 mt-0.5 accent-[#2852E3] cursor-pointer" />
+                        <div>
+                            <h3 class="text-[#263A50] text-xs font-bold mb-2">Siège bébé</h3>
+                            <p class="option-detail text-[#697C94] text-[11px]">30 MAD / jour · soit 90 MAD pour 3 jours</p>
+                        </div>
+                    </div>
+                </label> -->
+            </div>
+ 
+            <div class="mt-5 rounded-lg bg-blue-50 px-4 py-3.5 text-xs text-blue-600">
+                Vous pouvez sélectionner une, deux ou aucune option.
+            </div>
+ 
+            <hr class="my-6 border-slate-200" />
+ 
+            <div class="flex items-center justify-between gap-4">
+                <button type="button" id="btnPrecedent3" class="btn-precedent rounded-lg !border !border-[#D8E1EF] bg-white px-8 py-3.5 text-sm font-bold text-slate-900 hover:bg-slate-50 focus:ring-2 focus:ring-blue-600">Précédent</button>
+                <button type="button" id="btnSuivant3" class="suivant rounded-lg bg-blue-600 px-14 py-3.5 text-sm font-bold text-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2">Suivant</button>
+            </div>
+        </section>
             <aside class="h-fit w-full max-w-sm rounded-xl border border-[#D8E1EF] bg-white p-7">
                 <div class="flex flex-col gap-3 mb-3 pb-3 border-b border-[#D8E1EF]">
                     <p class="text-xs font-medium uppercase text-blue-600">Votre location</p>
