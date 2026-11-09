@@ -190,7 +190,7 @@ select {
 input::placeholder {
   color: #778393;
 }
-input:focus,
+form input:focus,
 select:focus {
   outline: 3px solid #dce5ff;
   border-color: var(--primary);
