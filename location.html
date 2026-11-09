@@ -188,36 +188,91 @@
 
             <!-- ------------------step 3----------------- -->
             <section id="etape3" class="hidden etape flex-2 p-5 bg-[#FFFFFF] border rounded-xl border-[#D8E1EF] text-[10px]">
-            <div class="mb-7">
-                <p class="text-[#2852E3] pb-5">03 / OPTIONS</p>
-                <h3 class="font-bold my-5 text-lg">Les petits plus de votre location</h3>
-                <p class="text-[#697C94]">Ces options sont facultatives et facturées par jour.</p>
-            </div>
+                <div class="mb-7">
+                    <p class="text-[#2852E3] pb-5">03 / OPTIONS</p>
+                    <h3 class="font-bold my-5 text-lg">Les petits plus de votre location</h3>
+                    <p class="text-[#697C94]">Ces options sont facultatives et facturées par jour.</p>
+                </div>
 
-            <div id="options_div" class="flex flex-col gap-3">
- 
-                <!-- <label for="siegeBebe" class="cursor-pointer">
-                    <div class="card-option flex items-start gap-3 p-4 border border-[#D8E1EF] rounded-xl bg-white transition-all has-[:checked]:border-2 has-[:checked]:border-[#2852E3] has-[:checked]:bg-[#F8FAFF]">
-                        <input type="checkbox" id="siegeBebe" value="siegeBebe" checked class="!w-5 !h-5 !p-0 !m-0 mt-0.5 accent-[#2852E3] cursor-pointer" />
-                        <div>
-                            <h3 class="text-[#263A50] text-xs font-bold mb-2">Siège bébé</h3>
-                            <p class="option-detail text-[#697C94] text-[11px]">30 MAD / jour · soit 90 MAD pour 3 jours</p>
+                <div id="options_div" class="flex flex-col gap-3">
+    
+                    <!-- <label for="siegeBebe" class="cursor-pointer">
+                        <div class="card-option flex items-start gap-3 p-4 border border-[#D8E1EF] rounded-xl bg-white transition-all has-[:checked]:border-2 has-[:checked]:border-[#2852E3] has-[:checked]:bg-[#F8FAFF]">
+                            <input type="checkbox" id="siegeBebe" value="siegeBebe" checked class="!w-5 !h-5 !p-0 !m-0 mt-0.5 accent-[#2852E3] cursor-pointer" />
+                            <div>
+                                <h3 class="text-[#263A50] text-xs font-bold mb-2">Siège bébé</h3>
+                                <p class="option-detail text-[#697C94] text-[11px]">30 MAD / jour · soit 90 MAD pour 3 jours</p>
+                            </div>
                         </div>
+                    </label> -->
+                </div>
+    
+                <div class="mt-5 rounded-lg bg-blue-50 px-4 py-3.5 text-xs text-blue-600">
+                    Vous pouvez sélectionner une, deux ou aucune option.
+                </div>
+    
+                <hr class="my-6 border-slate-200" />
+    
+                <div class="flex items-center justify-between gap-4">
+                    <button type="button" id="btnPrecedent3" class="btn-precedent rounded-lg !border !border-[#D8E1EF] bg-white px-8 py-3.5 text-sm font-bold text-slate-900 hover:bg-slate-50 focus:ring-2 focus:ring-blue-600">Précédent</button>
+                    <button type="button" id="btnSuivant3" class="suivant rounded-lg bg-blue-600 px-14 py-3.5 text-sm font-bold text-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2">Suivant</button>
+                </div>
+            </section>
+
+            <!-- ----------------------step 4------------------- -->
+
+            <section id="etape4" class="hidden etape flex-2 p-5 bg-[#FFFFFF] border rounded-xl border-[#D8E1EF] text-[10px]">
+ 
+                <div class="mb-7">
+                    <p class="text-[#2852E3] pb-5">04 / RÉCAPITULATIF</p>
+                    <h3 class="font-bold my-5 text-lg">Vérifiez votre demande</h3>
+                    <p class="text-[#697C94]">Tout est prêt ? Vérifiez vos informations avant de confirmer.</p>
+                </div>
+    
+                <!-- Véhicule et dates -->
+                <div class="flex items-start justify-between gap-4 py-5 border-b border-[#D8E1EF]">
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-900 mb-3">Véhicule et dates</h4>
+                        <p id="recapVehicule" class="text-xs text-[#697C94] leading-6">Dacia Sandero · 250 MAD / jour</p>
+                        <p id="recapDates" class="text-xs text-[#697C94] leading-6">Du 10 au 12 novembre 2026 · 3 jours</p>
                     </div>
-                </label> -->
-            </div>
- 
-            <div class="mt-5 rounded-lg bg-blue-50 px-4 py-3.5 text-xs text-blue-600">
-                Vous pouvez sélectionner une, deux ou aucune option.
-            </div>
- 
-            <hr class="my-6 border-slate-200" />
- 
-            <div class="flex items-center justify-between gap-4">
-                <button type="button" id="btnPrecedent3" class="btn-precedent rounded-lg !border !border-[#D8E1EF] bg-white px-8 py-3.5 text-sm font-bold text-slate-900 hover:bg-slate-50 focus:ring-2 focus:ring-blue-600">Précédent</button>
-                <button type="button" id="btnSuivant3" class="suivant rounded-lg bg-blue-600 px-14 py-3.5 text-sm font-bold text-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2">Suivant</button>
-            </div>
-        </section>
+                    <button type="button" data-etape="1" class="btn-modifier rounded-lg !border !border-[#D8E1EF] bg-white px-4 py-2 text-xs font-bold text-slate-900 hover:bg-slate-50 focus:ring-2 focus:ring-blue-600">Modifier</button>
+                </div>
+    
+                <!-- Récupération -->
+                <div class="flex items-start justify-between gap-4 py-5 border-b border-[#D8E1EF]">
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-900 mb-3">Récupération</h4>
+                        <p id="recapRecup1" class="text-xs text-[#697C94] leading-6">Aéroport Mohammed V, Casablanca</p>
+                        <p id="recapRecup2" class="text-xs text-[#697C94] leading-6">Vol AT 205 · arrivée à 10:30</p>
+                    </div>
+                    <button type="button" data-etape="2" class="btn-modifier rounded-lg !border !border-[#D8E1EF] bg-white px-4 py-2 text-xs font-bold text-slate-900 hover:bg-slate-50 focus:ring-2 focus:ring-blue-600">Modifier</button>
+                </div>
+    
+                <!-- Options -->
+                <div class="flex items-start justify-between gap-4 py-5 border-b border-[#D8E1EF]">
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-900 mb-3">Options</h4>
+                        <p id="recapOptions1" class="text-xs text-[#697C94] leading-6">Siège bébé · 30 MAD / jour</p>
+                        <p id="recapOptions2" class="text-xs text-[#697C94] leading-6">Sans conducteur supplémentaire</p>
+                    </div>
+                    <button type="button" data-etape="3" class="btn-modifier rounded-lg !border !border-[#D8E1EF] bg-white px-4 py-2 text-xs font-bold text-slate-900 hover:bg-slate-50 focus:ring-2 focus:ring-blue-600">Modifier</button>
+                </div>
+    
+                <hr class="my-5 border-[#D8E1EF]" />
+    
+                <div class="rounded-lg bg-blue-50 px-4 py-3.5 text-xs text-blue-600">
+                    La confirmation transmet une demande simulée. Aucun paiement n’est demandé.
+                </div>
+    
+                <hr class="my-6 border-slate-200" />
+    
+                <div class="flex items-center justify-between gap-4">
+                    <button type="button" id="btnPrecedent4" class="btn-precedent rounded-lg !border !border-[#D8E1EF] bg-white px-8 py-3.5 text-sm font-bold text-slate-900 hover:bg-slate-50 focus:ring-2 focus:ring-blue-600">Précédent</button>
+                    <button type="button" id="btnConfirmer" class="rounded-lg bg-blue-600 px-14 py-3.5 text-sm font-bold text-white focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2">Confirmer</button>
+                </div>
+            </section>
+
             <aside class="h-fit w-full max-w-sm rounded-xl border border-[#D8E1EF] bg-white p-7">
                 <div class="flex flex-col gap-3 mb-3 pb-3 border-b border-[#D8E1EF]">
                     <p class="text-xs font-medium uppercase text-blue-600">Votre location</p>
@@ -235,8 +290,12 @@
                             <p class="text-slate-500"></p>
                             <p class="font-bold text-slate-900"></p>
                         </div>
-                        <div id="bebe" class="flex items-center justify-between">
+                        <div id="bebeOption" class="flex items-center justify-between">
                             <p class="text-slate-500"></p>
+                            <p class="font-bold text-slate-900"></p>
+                        </div>
+                        <div id="conducteurOption" class="flex items-center justify-between">
+                            <p class="text-slate-500 text-[12px]"></p>
                             <p class="font-bold text-slate-900"></p>
                         </div>
                 </div>
