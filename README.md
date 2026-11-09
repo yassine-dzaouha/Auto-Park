@@ -18,6 +18,7 @@ Le projet est composé de deux interfaces principales :
 ## Aperçu du projet
 
 ![Tableau Jira du projet AutoPark](assets/image.png)
+![Tableau Jira du projet AutoPark](assets/image2.png)
 
 ## Fonctionnalités
 
