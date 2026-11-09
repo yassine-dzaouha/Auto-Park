@@ -111,7 +111,6 @@ const suivantbtns = document.querySelectorAll(".suivant");
 const suivantbtn = document.getElementById("Suivant");
 const etape1 = document.getElementById("etape1");
 const etape2 = document.getElementById("etape2");
-const options_div = document.getElementById("options_div");
 
 
 showCars();
@@ -138,7 +137,7 @@ function showCars() {
     const category = createElement( "span", "bg-[#EDF1FF] text-[#2852E3] text-[9px] font-semibold px-2 py-1.5 rounded", car.categorie);
     const radio = createElement("input", "!w-5", "", { type: "radio", name: "voiture", id: car.id});
     radio.addEventListener("change", () => {
-        document.querySelectorAll(".card").forEach((c)=> c.classList.remove("!border-[#2852E3]"))
+        document.querySelectorAll(".card").forEach((c)=> c.classList.remove("!border-[#2852E3]"));
             if (radio.checked) {
                 card.classList.add("!border-[#2852E3]");
                 selectedConfig.voitureId = car.id;
@@ -146,13 +145,13 @@ function showCars() {
             }
             if (radio.checked) {
                 validation();
-                showCarDetails(); 
+                showCarDetails();
                 if(!(selectedConfig.dateDebut == "" || selectedConfig.dateFin == "")){
                     showPrices();
                 }
             }
-        
     });
+
     header.append(category, radio);
 
     const title = createElement("h3", "text-[#263A50] text-xs font-bold mb-2", `${car.marque} ${car.modele}`);
@@ -416,7 +415,76 @@ function addRecuperation(){
     row.children[1].textContent = mode.fraisFixes ? `${mode.fraisFixes} MAD` : "Gratuit";
 }
 
+// ------------------------ step 3 ----------------------
 
+const options_div = document.getElementById("options_div");
+const bebeOption = document.getElementById("bebeOption");
+const conducteurOption = document.getElementById("conducteurOption");
+
+function showOptions() {
+    options_div.textContent = "";
+
+    const days = getDate();
+    config.options.forEach((opt) => {
+        const label = createElement("label", "cursor-pointer", "", { for: opt.id });
+ 
+        const card = createElement(
+            "div",
+            "card-option flex items-start gap-3 p-4 border border-[#D8E1EF] rounded-xl bg-white transition-all " +
+            "has-[:checked]:border-2 has-[:checked]:border-[#2852E3] has-[:checked]:bg-[#F8FAFF]"
+        );
+ 
+        const checkbox = createElement("input", "!w-5 !h-5 !p-0 !m-0 mt-0.5 accent-[#2852E3] cursor-pointer", "", {
+            type: "checkbox",
+            id: opt.id,
+            value: opt.id,
+        });
+ 
+        checkbox.addEventListener("change", () => {
+            selectedConfig.options[opt.id] = checkbox.checked;
+            addOption();
+            showTotal();
+        });
+ 
+        const info = createElement("div");
+        const nom = createElement("h3", "text-[#263A50] text-xs font-bold mb-2", opt.nom);
+        const detail = createElement(
+            "p",
+            "text-[#697C94] text-[11px]",
+            `${opt.prixParJour} MAD / jour · soit ${opt.prixParJour * days} MAD pour ${days} jour`
+        );
+ 
+        info.append(nom, detail);
+        card.append(checkbox, info);
+        label.append(card);
+        options_div.append(label);
+    });
+}
+
+ 
+function addOption() {
+    const days = getDate();
+    const bebe = config.options[0];
+    const conducteur = config.options[1];
+    console.log(selectedConfig.options.siegeBebe)
+    if (selectedConfig.options.siegeBebe) {
+        bebeOption.children[0].textContent = `${bebe.nom} · ${days} × ${bebe.prixParJour} MAD`;
+        bebeOption.children[1].textContent = `${days * bebe.prixParJour} MAD`;
+        bebeOption.classList.remove("hidden");
+    } else {
+        bebeOption.classList.add("hidden");
+    }
+
+    if (selectedConfig.options.conducteurSupplementaire) {
+        conducteurOption.children[0].textContent = `${conducteur.nom} · ${days}×${conducteur.prixParJour}MAD`;
+        conducteurOption.children[1].textContent = `${days * conducteur.prixParJour} MAD`;
+        conducteurOption.classList.remove("hidden");
+    } else {
+        conducteurOption.classList.add("hidden");
+    }
+}
+
+// -------------------total------------------------
 
 function showTotal() {
     let mode = config.modesRecuperation.find((mode)=>mode.id == selectedConfig.modeRecuperation);
@@ -424,9 +492,23 @@ function showTotal() {
         total.textContent = "__ MAD";
         return;
     }
-    const days = Math.round((new Date(selectedConfig.dateFin) - new Date(selectedConfig.dateDebut)) / 86400000) + 1;
-    total.textContent = `${days * carObj.prixJour + mode.fraisFixes} MAD`;
+    let optionsParJour = 0;
+    config.options.forEach((opt) => {
+        if (selectedConfig.options[opt.id]) {
+            optionsParJour += opt.prixParJour;
+        }
+    });
+    const days = getDate()
+    let prixTotal = days * (carObj.prixJour + optionsParJour) + mode.fraisFixes ;
+    total.textContent = `${prixTotal} MAD`;
 }
+
+// -------------------step 4---------------------
+
+
+
+
+// -------------------global-------------------
 
 suivantbtns.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -434,7 +516,7 @@ suivantbtns.forEach((btn) => {
             steper(selectedConfig.etape + 1);
         }
     });
-})
+});
 
 document.querySelectorAll(".btn-precedent").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -458,7 +540,6 @@ function steper(etap){
         const number = step.querySelector("p");
         if(i < selectedConfig.etape - 1){
             number.textContent = "✓";
-
         }else{
             number.textContent = i + 1;
         }
@@ -466,12 +547,16 @@ function steper(etap){
             step.classList.add("text-[#2852E3]");
             number.classList.add("bg-[#2852E3]", "text-[#FFFFFF]");
             number.classList.remove("bg-[#F4F6FA]");
-        } else {
+        }else {
             step.classList.remove("text-[#2852E3]");
             number.classList.remove("bg-[#2852E3]", "text-[#FFFFFF]");
             number.classList.add("bg-[#F4F6FA]");
         }
     });
-    if (etap === 2) showRecuperationForm();
+    if (etap === 2) showRecuperation();
     if (etap === 3) showOptions();
 }
+
+function getDate(){
+    return Math.round((new Date(selectedConfig.dateFin) - new Date(selectedConfig.dateDebut)) / 86400000) + 1;
+};
